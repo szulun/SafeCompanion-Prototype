@@ -40,7 +40,7 @@ button:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
 
 /* narration bar */
 .bar{max-width:1080px;margin:0 auto 20px;display:grid;grid-template-columns:1fr auto;gap:12px 20px;align-items:start}
-.bar h1{border-bottom:5px solid var(--gold);display:inline-block;padding-bottom:2px;font-family:var(--f-display);font-weight:900;font-size:1.65rem;margin:0;letter-spacing:.02em;text-wrap:balance}
+.bar h1{border-bottom:5px solid var(--gold);display:inline-block;padding-bottom:2px;font-family:var(--f-display);font-weight:700;font-size:1.65rem;margin:0;letter-spacing:.02em;text-wrap:balance}
 .bar .sub{color:var(--muted);margin:2px 0 0;font-size:.92rem}
 .tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .tbtn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-size:.88rem}
@@ -57,7 +57,7 @@ button:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
 .bench{max-width:1080px;margin:0 auto;display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
 .device{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
 .device .who{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
-.phone{width:360px;max-width:100%;height:740px;background:var(--frame);border-radius:46px;padding:12px;box-shadow:0 18px 40px -18px rgba(0,0,0,.45)}
+.phone{width:360px;max-width:100%;height:740px;height:clamp(560px,calc(100vh - 48px),740px);height:clamp(560px,calc(100dvh - 48px),740px);background:var(--frame);border-radius:46px;padding:12px;box-shadow:0 18px 40px -18px rgba(0,0,0,.45)}
 .glass{position:relative;height:100%;border-radius:36px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
 .status{display:flex;justify-content:space-between;padding:12px 26px 6px;font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums}
 .screen{flex:1;overflow-y:auto;padding:8px 18px 22px;display:flex;flex-direction:column;gap:14px}
@@ -68,12 +68,12 @@ button:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
   .bar{grid-template-columns:1fr}.tools{justify-content:flex-start}
   .tabs{display:flex}
   .device[data-hidden="1"]{display:none}
-  .phone{height:700px}
+  .phone{height:700px;height:clamp(540px,calc(100vh - 72px),700px);height:clamp(540px,calc(100dvh - 72px),700px)}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ---------- elder app (big type) ---------- */
-.app-h{font-size:1.75rem;font-weight:900;line-height:1.3;margin:0;text-wrap:balance}
+.app-h{font-size:1.75rem;font-weight:700;line-height:1.3;margin:0;text-wrap:balance}
 .app-p{font-size:1.2rem;margin:0;line-height:1.6}
 .small{font-size:.95rem;color:var(--muted);margin:0}
 .big{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:2px solid var(--line);background:var(--surface);
@@ -86,11 +86,11 @@ button:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
 .big.soon{border-style:dashed;color:var(--muted)}
 .big .sx{display:block;font-size:.9rem;font-weight:500;opacity:.85}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.yn{border:2px solid var(--line);border-radius:20px;padding:20px 8px;font-size:1.6rem;font-weight:900;background:var(--surface)}
+.yn{border:2px solid var(--line);border-radius:20px;padding:20px 8px;font-size:1.6rem;font-weight:700;background:var(--surface)}
 .yn.yes{border-color:var(--danger);color:var(--danger)}
 .yn.no{border-color:var(--sea);color:var(--sea)}
 .link{border:0;background:none;color:var(--sea);font-size:1.05rem;font-weight:700;padding:10px;text-decoration:underline;text-underline-offset:4px}
-.banner{border-radius:16px;padding:14px 16px;font-size:1.25rem;font-weight:900;line-height:1.4}
+.banner{border-radius:16px;padding:14px 16px;font-size:1.25rem;font-weight:700;line-height:1.4}
 .banner.danger{background:var(--danger-soft);color:var(--danger)}
 .banner.warn{background:var(--warn-soft);color:var(--warn)}
 .banner.ok{background:var(--ok-soft);color:var(--ok)}
@@ -111,30 +111,13 @@ button:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
 
 /* call ui */
 .callui{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding-top:30px;background:linear-gradient(var(--surface2),var(--surface))}
-.avatar{width:84px;height:84px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-size:2rem;font-weight:900;color:var(--muted)}
+.avatar{width:84px;height:84px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-size:2rem;font-weight:700;color:var(--muted)}
 .callui .nm{font-size:1.5rem;font-weight:700}
 .callui .tm{font-family:var(--f-mono);color:var(--muted)}
 .cbtns{display:grid;grid-template-columns:repeat(3,64px);gap:18px;margin-top:auto;margin-bottom:10px}
 .cb{width:64px;height:64px;border-radius:50%;border:0;background:var(--line);display:grid;place-items:center}
 .cb.end{background:#D92D20;color:#fff}.cb.acc{background:#1E9E55;color:#fff}
 .cb svg{width:26px;height:26px}
-.widget{width:100%;border:0;border-radius:18px;background:var(--danger);color:#fff;padding:14px;font-size:1.15rem;font-weight:900;display:flex;gap:10px;align-items:center;justify-content:center}
-:root[data-theme="dark"] .widget{color:#1a0705}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .widget{color:#1a0705}}
-.widget small{font-weight:500;font-size:.8rem;display:block;opacity:.9}
-@keyframes pulse{50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--danger) 25%,transparent)}}
-
-/* recording */
-.rec{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
-.recbtn{width:150px;height:150px;border-radius:50%;border:0;background:var(--danger);color:#fff;display:grid;place-items:center;font-size:1.25rem;font-weight:900}
-.recbtn.idle{background:var(--sea);color:var(--sea-ink)}
-.recbtn svg{width:46px;height:46px}
-.live{color:var(--danger);font-weight:900;font-size:1.3rem}
-@keyframes blink{50%{opacity:.35}}
-.wave{display:flex;gap:4px;height:40px;align-items:center}
-.wave i{width:6px;border-radius:3px;background:var(--danger);animation:w 0.9s ease-in-out infinite}
-@keyframes w{50%{height:8px}}
-.transcript{font-size:1.1rem;text-align:left;border-radius:14px;background:var(--surface2);padding:12px 14px;min-height:96px;width:100%}
 
 .spin{width:56px;height:56px;border-radius:50%;border:6px solid var(--line);border-top-color:var(--sea);animation:r 1s linear infinite;margin:40px auto 10px}
 @keyframes r{to{transform:rotate(360deg)}}
@@ -162,7 +145,7 @@ button:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
 @keyframes drop{from{transform:translateY(-30px);opacity:0}}
 .push .ap{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);font-weight:700;letter-spacing:.04em}
 .push b{display:block;margin-top:2px}
-.fh{font-size:1.25rem;font-weight:900;margin:0}
+.fh{font-size:1.25rem;font-weight:700;margin:0}
 .fbtn{border:0;border-radius:12px;padding:12px;font-weight:700;background:var(--sea);color:var(--sea-ink);width:100%}
 .fbtn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.95rem}.kv dt{color:var(--muted)}.kv dd{margin:0;font-weight:500}
@@ -181,9 +164,6 @@ button:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
 .notice small{display:block;font-size:.85rem;font-weight:500;color:var(--muted);margin-bottom:4px}
 .nbar{width:100%;height:8px;border-radius:4px;background:var(--line);overflow:hidden}.nbar i{display:block;height:100%;width:0;background:var(--sea);animation:fill 4.2s linear forwards}
 @keyframes fill{to{width:100%}}
-.live-tx{width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;font-size:.98rem;max-height:210px;overflow-y:auto}
-.live-tx p{margin:0}.live-tx .who{font-weight:700;font-size:.8rem;color:var(--muted);display:block}
-.live-tx .sys{color:var(--sea)}.live-tx mark{background:var(--danger-soft);color:var(--danger);border-radius:4px;padding:0 3px;font-weight:700}
 .signs{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
 .sign{border:2px solid var(--line);border-radius:12px;padding:8px 10px;font-size:.95rem;font-weight:700;color:var(--muted);text-align:left;display:flex;gap:8px;align-items:center}
 .sign::before{content:"";width:12px;height:12px;border-radius:50%;border:2px solid currentColor;flex:none}
@@ -192,7 +172,7 @@ button:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
 .flags{display:flex;flex-direction:column;gap:6px}
 .flag{background:var(--danger-soft);color:var(--danger);border-radius:10px;padding:7px 10px;font-weight:700;font-size:.95rem;display:flex;gap:10px;align-items:baseline}
 .flag .mono{font-size:.78rem;font-weight:500;opacity:.8}
-.listen{width:100%;border-radius:18px;padding:16px;font-size:1.3rem;font-weight:900;line-height:1.4;text-align:left;background:var(--ok-soft);color:var(--ok)}
+.listen{width:100%;border-radius:18px;padding:16px;font-size:1.3rem;font-weight:700;line-height:1.4;text-align:left;background:var(--ok-soft);color:var(--ok)}
 .listen.warn{background:var(--warn-soft);color:var(--warn)}
 .listen small{display:block;font-size:1rem;font-weight:500;margin-top:4px}
 .fbtn:disabled{opacity:.6;cursor:default}
@@ -220,6 +200,7 @@ button:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
 .lawcard{border:2px solid var(--sea);border-radius:18px;padding:14px 16px;background:var(--sea-soft)}
 .lawcard b{display:block;font-size:1.25rem;line-height:1.35;margin-bottom:4px}
 .lawcard p{margin:0;font-size:1.1rem}
+.lawcard p.out{margin-top:10px;font-size:.98rem;color:var(--muted)}
 .cite{font-size:.85rem;color:var(--muted);margin:0;border-top:1px solid var(--line);padding-top:10px}
 .guard{display:inline-flex;align-items:center;gap:6px;align-self:center;background:var(--ok-soft);color:var(--ok);border-radius:999px;padding:5px 12px;font-size:.9rem;font-weight:700}
 dialog.legal{border:0;padding:0;border-radius:20px;width:min(820px,calc(100vw - 24px));max-height:calc(100vh - 32px);background:var(--surface);color:var(--ink);box-shadow:0 30px 80px -20px rgba(0,0,0,.55)}
@@ -251,7 +232,7 @@ dialog.legal::backdrop{background:rgba(10,20,16,.55)}
 <header class="bar">
   <div>
     <h1>SafeCompanion Prototype</h1>
-    <p class="sub">Demo journey: a stranger calls Mary → the caller hears the recording notice → the app listens and spots scam signs → she hangs up → reassurance → she decides whether to tell her daughter → she calls Linda</p>
+    <p class="sub">Demo journey: a stranger calls Mary → the caller hears the recording notice → the app listens and spots scam signs → for a likely scam, Linda is alerted live, as Mary chose in her settings; for a “be careful” call, Mary decides afterward whether to tell her → Mary gets reassurance → she calls Linda</p>
   </div>
   <div class="tools">
     <div class="seg" role="group" aria-label="Demo call"><span>Demo call</span><button data-sc="t1" aria-pressed="false">Tier 1</button><button data-sc="t2" aria-pressed="false">Tier 2</button><button data-sc="t3" aria-pressed="true">Tier 3</button></div>
@@ -262,15 +243,15 @@ dialog.legal::backdrop{background:rgba(10,20,16,.55)}
   <div class="hint" id="hint"><span class="tag">SPEAKER NOTE</span><p id="hintText"></p></div>
 </header>
 
-<div class="tabs" role="tablist">
-  <button role="tab" id="tabM" aria-selected="true">Mary (older adult)</button>
-  <button role="tab" id="tabL" aria-selected="false">Linda (family)<span class="dot" id="tabDot" hidden></span></button>
+<div class="tabs" role="tablist" aria-label="Choose a phone">
+  <button role="tab" id="tabM" aria-selected="true" aria-controls="devM">Mary (older adult)</button>
+  <button role="tab" id="tabL" aria-selected="false" aria-controls="devL">Linda (family)<span class="dot" id="tabDot" hidden></span></button>
 </div>
 
 <main class="bench">
-  <section class="device" id="devM"><div class="who">Mary · 78 · older adult</div>
+  <section class="device" id="devM" role="tabpanel" aria-labelledby="tabM"><div class="who">Mary · 78 · older adult</div>
     <div class="phone"><div class="glass"><div class="status"><span class="mono js-clock">10:31</span><span>●●● 5G</span></div><div class="screen" id="scrM"></div></div></div></section>
-  <section class="device" id="devL" data-hidden="1"><div class="who">Linda · daughter · family</div>
+  <section class="device" id="devL" role="tabpanel" aria-labelledby="tabL" data-hidden="1"><div class="who">Linda · daughter · family</div>
     <div class="phone"><div class="glass"><div class="status"><span class="mono js-clock">10:31</span><span>●●● 5G</span></div><div class="screen fam" id="scrL"></div></div></div></section>
 </main>
 
@@ -289,7 +270,7 @@ dialog.legal::backdrop{background:rgba(10,20,16,.55)}
   </dl>
   <h3>How the design stays compliant</h3>
   <ul class="guards">
-   <li><b>The notice plays before recording starts</b><span>On every call, incoming and outgoing, the other person hears who is recording and why.</span><button data-jump="notice">Show me</button></li>
+   <li><b>The notice plays before recording starts</b><span>On every call, incoming and outgoing, the other person hears who is recording and why, worded for the direction of the call.</span><button data-jump="notice">Show me</button></li>
    <li><b>Hanging up is a real way to decline</b><span>If the caller leaves at the notice, nothing is recorded. Scammers often do exactly this.</span><button data-jump="quit">Show me</button></li>
    <li><b>Mary always sees that she’s recording</b><span>A recording badge stays on screen for the whole call, and live scam signs explain why it’s useful.</span><button data-jump="call">Show me</button></li>
    <li><b>Mary consents once, and can see it anytime</b><span>Her privacy screen states that calls are recorded with notice and who can play them.</span><button data-jump="privacy">Show me</button></li>
@@ -301,8 +282,8 @@ dialog.legal::backdrop{background:rgba(10,20,16,.55)}
   <h3>How calls are sorted</h3>
   <dl class="statutes">
    <dt>Tier 1</dt><dd><b>Normal.</b> No scam signs heard. Nobody is notified and the call isn’t shown to family, so alerts stay meaningful and everyday calls stay private.</dd>
-   <dt>Tier 2</dt><dd><b>Be careful.</b> One scam sign. When the call ends, Mary gets a three-line summary and Linda gets the full summary with flagged phrases and next steps.</dd>
-   <dt>Tier 3</dt><dd><b>Likely scam.</b> Two or more scam signs. Mary is warned during the call, Linda gets a live alert, and both get summaries afterward. <button class="tbtn" data-jump="tiers" style="margin-left:6px">Try a Tier 2 call</button></dd>
+   <dt>Tier 2</dt><dd><b>Be careful.</b> One scam sign. When the call ends, Mary gets a three-line summary and decides whether to send Linda the full summary with flagged phrases and next steps. Nothing reaches Linda unless Mary taps to share.</dd>
+   <dt>Tier 3</dt><dd><b>Likely scam.</b> Two or more scam signs. Mary is warned during the call. Because Mary chose this in her settings ahead of time, Linda gets a live alert, and both get summaries afterward. <button class="tbtn" data-jump="tiers" style="margin-left:6px">Try a Tier 2 call</button></dd>
   </dl>
   <h3>Where this beats record-everything call apps</h3>
   <div class="cmpwrap"><table class="cmp">
@@ -334,21 +315,18 @@ const I={
  mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10a7 7 0 0 1-14 0M12 19v3"/></svg>',
  pill:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="8" rx="4" transform="rotate(-35 12 12)"/><path d="m9.5 8.5 5 7"/></svg>',
  people:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M17 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"/></svg>',
- rec:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>',
  scale:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg>',
- stop:'<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>',
  mute:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l20 20M9 9v3a3 3 0 0 0 5 2M15 9.3V5a3 3 0 0 0-5.7-1.3M19 10a7 7 0 0 1-1 3.5M5 10a7 7 0 0 0 11 5.7M12 19v3"/></svg>',
  spk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>'
 };
 
 const PERMS=[
- {k:'alerts',name:'Scam alerts',see:'If a call might be a scam, Linda gets the full details. Normal calls are never shared',fam:'Full details of Tier 2 and 3 calls, and a live alert for Tier 3. Never normal calls or recordings'},
+ {k:'alerts',name:'Scam alerts',see:'Likely-scam calls alert Linda right away. For “be careful” calls, you choose each time. Normal calls are never shared',fam:'A live alert and full details for Tier 3 calls. Tier 2 only when Mom chooses to share. Never normal calls or recordings'},
  {k:'meds',name:'Medicine reminders',see:'Linda sees whether you took it, not the medicine name',fam:'Whether Mom took it, not the medicine name'},
  {k:'sos',name:'Emergency button',see:'When pressed, Linda sees the time and rough location',fam:'The time and rough location when Mom presses it'},
  {k:'daily',name:'Daily activity',see:'Linda sees only whether you used the app today',fam:'Only whether Mom used the app today'}
 ];
 const QS=['Are they asking you to pay, buy gift cards, or send money?','Are they saying it’s urgent and must be done today?','Are they asking for your Social Security number, bank account, or a code?','Are they telling you not to tell your family?'];
-const TRANSCRIPT='A man just called. He said he was from Social Security and that my Social Security number was suspended. He wanted me to read the number to him today to confirm it, or my account would be frozen. He also told me not to tell my family.';
 const SHOTS={
  usps:{from:'+1 (415) 555-0199',text:'USPS: Your package could not be delivered due to an incomplete address. Update your details within 24 hours at usps-redeliver-help.com and pay a $1.99 redelivery fee.',risk:'high',type:'Fake delivery (USPS)',
    why:['The link is not the official usps.com','The small fee is a way to get your card details','“Within 24 hours” is meant to rush you'],
@@ -361,7 +339,9 @@ const CALL_REPORT={risk:'high',type:'Government impersonation (Social Security)'
   why:['The caller asked you to read out your Social Security number. Social Security never does that by phone','They said it “must be done today,” which is meant to rush you','They told you not to discuss it with family, a common scam sign'],
   todo:['Don’t call that number back','If you’re still worried, call Social Security’s official number yourself','If you already gave your number, tell your family and handle it together'],action:'Hung up and shared no information'};
 
+/* The notice is worded for the direction of the call */
 const NOTICE='This call is being recorded by SafeCompanion to help protect the person you’re calling. Warnings may be shared with their family.';
+const NOTICE_OUT='This call is being recorded by SafeCompanion to help protect the person calling you. Warnings may be shared with their family.';
 const NL={w:'SafeCompanion',sys:1,t:NOTICE};
 const SCEN={
  t1:{num:'(510) 555-0182',place:'Berkeley, CA',claim:'CVS Pharmacy',type:'Pharmacy reminder',action:'Talked normally',
@@ -371,7 +351,7 @@ const SCEN={
   brief:{head:'That call might not be safe.',line:'Someone said they were Medicare and asked for your date of birth. You didn’t share it.',tip:'Don’t call that number back.'},
   steps:['Check in with Mom. Saying no was exactly right','Medicare doesn’t call to ask for a Medicare number. Its real number is 1-800-633-4227 if Mom wants to check','If this number calls again, it will show up in Mom’s calls','You can report the number at reportfraud.ftc.gov'],
   opener:'Mom, I heard you didn’t give your details to that Medicare caller. That was smart!',
-  pushT:'Mom had a call worth a look',pushB:'Tier 2 · Someone claiming to be Medicare asked for her details. She said no.'},
+  pushT:'Mom shared a call worth a look',pushB:'Tier 2 · Someone claiming to be Medicare asked for her details. She said no.'},
  t3:{num:'(202) 555-0143',place:'Washington, DC',claim:'Social Security',type:'Government impersonation (Social Security)',action:'Hung up and shared nothing',
   live:[NL,{w:'Caller',t:'Hello, this is Officer Daniel Brooks with the Social Security Administration.'},{w:'Caller',t:'Your Social Security number has been <mark>suspended</mark> due to suspicious activity.'},{w:'Mary',t:'Oh no. What does that mean?'},{w:'Caller',t:'I need you to <mark>read me your number</mark> to confirm it. This <mark>must be done today</mark> or your account will be frozen.',hit:[1,2]},{w:'Caller',t:'And please <mark>don’t discuss this with family</mark>. It’s a federal matter.',hit:[3]}],
   brief:{head:'You stopped a scam call. Well done.',line:'Someone pretending to be Social Security asked for your number. You didn’t give it.',tip:'If they call again, just hang up.'},
@@ -386,7 +366,7 @@ const tierOf=a=>{const n=a.filter(Boolean).length;return n>=2?3:n===1?2:1;};
 const SIGNS=['Money or gift cards','Rushing you','Asking for personal info','Keep it secret'];
 let S, timers=[];
 function fresh(){return {m:'ring',tier:0,callDone:false,callLen:0,live:0,signs:[false,false,false,false],flags:[],liveSent:false,lindaMsg:false,l:'idle',qi:0,ans:[],source:'call',shot:null,report:null,notified:false,declined:false,handled:false,
-  perms:{alerts:true,meds:true,sos:true,daily:false},callStart:Date.now(),rec:{sec:0,chars:0,state:'idle'},
+  perms:{alerts:true,meds:true,sos:true,daily:false},callStart:Date.now(),
   fam:null,famStart:0,sheet:null,toastL:null,tab:'m',unseen:false};}
 function clear(){timers.forEach(t=>{clearInterval(t);clearTimeout(t)});timers=[];}
 const $=id=>document.getElementById(id);
@@ -395,8 +375,8 @@ const callSec=()=>Math.floor((Date.now()-S.callStart)/1000);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 const HINTS={
- mpush:'After a Tier 2 or 3 call, both phones get a notification. Mary’s is one plain sentence.',
- brief:'Mary’s summary is three lines: what happened, that she did well, and one thing to do. Linda received the full version at the same moment.',
+ mpush:'After a Tier 2 or 3 call, Mary gets one plain sentence. For Tier 3, Linda was already alerted, because Mary set that up in her settings. For Tier 2, nothing reaches Linda unless Mary chooses.',
+ brief:'Mary’s summary is three lines: what happened, that she did well, and one thing to do. For a likely scam, Linda received the full version at the same moment, as Mary chose in her settings.',
  ring:'An unknown number calls Mary. Use “Demo call” above to switch between Tier 1, 2 and 3 callers. SafeCompanion protects every call: tap Answer and the caller hears the recording notice before anything is recorded.',
  notice:'The legal heart of the design. Under California law everyone on a call must consent to recording. The caller hears a clear notice at the very start; recording begins only after it. Staying on the line counts as consent; hanging up is their way to decline.',
  call:'Mary’s screen stays simple: a recording badge and one plain status. The detailed detection (highlighted phrases, the four FTC warning signs) goes to Linda’s phone as a live alert, because Mary turned live alerts on in her settings.',
@@ -406,17 +386,14 @@ const HINTS={
  q:'Manual backup to the live detection: Mary answers yes/no questions while she listens. The four questions match common scam signs listed by the FTC. One “yes” means high risk.',
  high:'Mary gets one clear instruction and a line to read aloud, with no transcript to parse. The evidence already went to Linda.',
  low:'Even with no clear warning signs, the app keeps her careful and offers a check after she hangs up.',
- calm:'This is the companionship step: praise first, to reduce shame. Because the call was recorded with notice, Mary doesn’t have to explain anything; the app already has what it needs.',
- rec:'One tap to start. A clear “Recording” label, and it stops on its own after a pause, so she can’t forget to stop it.',
- recdone:'She can play it back before sending, which builds confidence. The audio is deleted once it becomes text.',
- analyzing:'The AI turns her description into a plain-language risk explanation.',
+ analyzing:'The AI turns the call into a plain-language risk explanation.',
  report:'The result explains “why it’s suspicious” and “what to do next” in plain words, with no jargon.',
  notify:'The key autonomy screen: Mary decides whether to tell her daughter. Linda only sees a summary.',
  connect:'The AI doesn’t replace family; it brings Mary back to her family.',
  privacy:'Mary can always see who sees what, and can turn each item off herself. Full conversations are never shared.',
  shots:'Screenshot path: for text and email scams. Compare a scam text with a normal pharmacy notice.',
- law:'The law in plain language: every caller hears the notice, staying on the line means they agree, and only Mary can play her recordings.',
- famcall:'Family call in progress. Tap “Restart” when the demo is done.'
+ law:'The law in plain language: everyone on the call hears a notice worded for its direction, staying on the line means they agree, and only Mary can play her recordings.',
+ famcall:'Family call in progress. Linda hears the notice too, worded for an outgoing call. Tap “Restart” when the demo is done.'
 };
 
 /* ---------- Mary ---------- */
@@ -452,6 +429,7 @@ function mary(){
  if(m==='home') return `
    <div><p class="small">Thursday, October 22</p><h2 class="app-h">Good morning, Mary</h2></div>
    ${S.handled?`<div class="banner ok">You stopped a suspicious ${S.source==='call'?'call':'message'} today. Well done.</div>`:''}
+   ${S.callDone&&S.tier===1&&!S.handled?'<div class="banner ok">That call was normal. I didn’t hear any scam signs.</div>':''}
    <button class="big alert" data-a="startGuard">${I.shield}<span>I’m on a suspicious call<span class="sx">Answer 4 questions while you listen</span></span></button>
    <button class="big" data-a="shots">${I.camera}<span>Check a message<span class="sx">Just pick a screenshot</span></span></button>
    <button class="big" data-a="recent">${I.mic}<span>Check a recent call<span class="sx">I already have the recording</span></span></button>
@@ -485,35 +463,17 @@ function mary(){
  if(m==='mpush'){const t3=S.tier===3;return `<div class="lockscreen" style="margin:-8px -18px -22px;padding:40px 16px 22px">
    <div class="clock">10:33</div><div class="date">Thursday, October 22</div>
    <button class="push mpush" data-a="openBrief"><div class="ap"><span>SAFECOMPANION</span><span>now</span></div><b>${t3?'You stopped a scam call':'That call might not be safe'}</b>Tap to see a short summary.</button></div>`;}
- if(m==='brief'){const c=sc(),t=TIERS[S.tier],b=c.brief||SCEN.t3.brief;return `
+ if(m==='brief'){const c=sc(),t=TIERS[S.tier],b=c.brief||SCEN.t3.brief;const choose=S.tier===2&&S.perms.alerts&&!S.notified;return `
    <span class="pill ${t.cls}" style="align-self:flex-start;font-size:1rem">${S.tier===3?'Likely scam':'Be careful'}</span>
    <h2 class="app-h">${b.head}</h2>
    <p class="app-p">${b.line}</p>
    <div class="tipbox">${b.tip}</div>
-   <p class="small">${S.notified?'Linda has the full details.':'Only you can see this. Linda wasn’t told.'}</p>
+   <p class="small">${S.notified?'Linda has the full details.':choose?'Linda hasn’t been told. It’s your choice.':'Only you can see this. Linda wasn’t told.'}</p>
    <div class="spacer"></div>
-   <button class="big primary" data-a="callLinda">${I.phone}<span>Call Linda</span></button>
-   ${S.notified?'':'<button class="big" data-a="tellLinda"><span>Tell Linda this time</span></button>'}
-   <button class="link" data-a="goHome">Done</button>`;}
- if(m==='calm') return `
-   <div class="banner ok" style="font-size:1.45rem">${S.ans.some(Boolean)?'You handled that well.':'That’s okay. Let’s look together.'}</div>
-   <p class="app-p">${S.ans.some(Boolean)?'Many people get calls like this. Hanging up was the right thing to do. ':''}I recorded the call with the caller’s notice, so you don’t have to explain anything.</p>
-   <div class="card"><h3>Your recording</h3><ul><li>Only you can play it</li><li>It’s deleted after 30 days</li><li>Linda never hears it</li></ul></div>
-   <div class="spacer"></div>
-   <button class="big primary" data-a="analyze">${I.shield}<span>Show me what you found</span></button>
-   <button class="link" data-a="recStart">Add something in my own words</button>`;
- if(m==='rec') return `
-   <div class="rec"><span class="live">● Recording your note</span><span class="mono js-rectime" style="font-size:2rem">${mmss(S.rec.sec)}</span>
-   <div class="wave">${Array.from({length:14},(_,k)=>`<i style="height:${14+((k*37)%26)}px;animation-delay:${(k%5)*.12}s"></i>`).join('')}</div>
-   <div class="transcript js-tx">${esc(TRANSCRIPT.slice(0,S.rec.chars))}<span class="mono">▌</span></div>
-   <button class="recbtn" data-a="recStop">${I.stop}</button><b style="font-size:1.1rem">Done? Tap here to stop</b>
-   <p class="small">It also stops by itself after a pause</p></div>`;
- if(m==='recdone') return `
-   <h2 class="app-h">Here’s what I heard:</h2>
-   <div class="transcript">${esc(TRANSCRIPT)}</div>
-   <div class="row2"><button class="big" style="justify-content:center" data-a="play">▶ Play back</button><button class="big" style="justify-content:center" data-a="recStart">Say it again</button></div>
-   <div class="spacer"></div>
-   <button class="big primary" data-a="analyze">${I.shield}<span>Yes, check it for me</span></button>`;
+   ${choose?'<button class="big primary" data-a="tellLinda"><span>Send Linda the details</span></button>':''}
+   <button class="big ${choose?'':'primary'}" data-a="callLinda">${I.phone}<span>Call Linda</span></button>
+   ${S.notified||choose?'':'<button class="big" data-a="tellLinda"><span>Tell Linda this time</span></button>'}
+   <button class="link" data-a="goHome">${choose?'Keep it to myself':'Done'}</button>`;}
  if(m==='analyzing') return `<div class="spin"></div><h2 class="app-h" style="text-align:center">Checking it for you…</h2><p class="small" style="text-align:center">This takes a few seconds</p>`;
  if(m==='shots') return `
    <h2 class="app-h">Pick a screenshot to check</h2><p class="small">Your most recent screenshots</p>
@@ -548,7 +508,7 @@ function mary(){
  if(m==='law') return `
    <div style="color:var(--sea)">${I.scale.replace('<svg','<svg width="40" height="40"')}</div>
    <h2 class="app-h">How call recording works</h2>
-   <div class="lawcard"><b>Every caller hears this first</b><p>“${NOTICE}”</p></div>
+   <div class="lawcard"><b>Everyone who calls you hears this first</b><p>“${NOTICE}”</p><p class="out">When you call someone, they hear: “${NOTICE_OUT}”</p></div>
    <div class="card"><h3>Why that’s allowed</h3><ul><li>In California, everyone on a call has to agree to be recorded</li><li>The notice tells them before recording starts</li><li>Staying on the line means they agree. If they don’t, they can hang up</li></ul></div>
    <div class="card"><h3>Your recordings</h3><ul><li>Only you can play them</li><li>Deleted after 30 days</li><li>If a call sounds like a scam, Linda gets an alert with the warning words. You can turn this off</li></ul></div>
    <p class="cite">Based on California Penal Code sections 632 and 632.7. General information, not legal advice.</p>
@@ -558,7 +518,7 @@ function mary(){
    <p class="small">Family with access: <b>Linda (daughter)</b></p>
    <div>${PERMS.map(p=>`<div class="perm"><b>${p.name}</b><span>${p.see}</span><button class="sw" role="switch" aria-checked="${S.perms[p.k]}" aria-label="${p.name}" data-a="tog:${p.k}"></button></div>`).join('')}
    <div class="perm"><b>Full conversations</b><span>Never shared with anyone</span><span class="lock">Never</span></div>
-   <div class="perm"><b>Call recordings</b><span>Every caller hears the notice first. Only you can play recordings; they’re deleted after 30 days.</span><span class="lock">Only you</span></div></div>
+   <div class="perm"><b>Call recordings</b><span>Everyone on the call hears the notice first. Only you can play recordings; they’re deleted after 30 days.</span><span class="lock">Only you</span></div></div>
    <button class="link" style="align-self:flex-start;padding-left:0" data-a="law:privacy">How call recording works</button>
    <p class="small">Only you can change these. Linda can see that you changed them, but she can’t change them for you.</p>
    <button class="big primary" data-a="goHome"><span>Done</span></button>`;
@@ -571,8 +531,12 @@ function msgBanner(){return '<div class="banner ok" style="font-size:1.15rem;wid
 function callStrip(){return S.hungup?'':`<div class="oncall"><span>● Recording · ${sc().num}</span><span class="js-calltime">${mmss(callSec())}</span></div>`;}
 function hitText(){const t=['asked you to pay or send money','rushed you to act today','asked for your numbers or codes','told you not to tell your family'];const h=S.ans.map((a,k)=>a?t[k]:null).filter(Boolean);if(!h.length)return 'did something suspicious';return h.length===1?h[0]:h.slice(0,-1).join(', ')+', and '+h[h.length-1];}
 function famCallUi(name,sub,incoming,who){
+ /* The person dialing is the "caller"; the one answering hears nothing new. Mary calling out → Linda hears NOTICE_OUT. Linda calling Mary → Linda hears NOTICE. */
+ const dialing=sub==='Calling…';
+ const noticeBox=dialing?`<div class="notice" style="margin-top:18px;font-size:${who==='m'?'1.05rem':'.95rem'}"><small>${who==='m'?'When Linda answers, she first hears':'When Mom answers, you first hear'}</small>“${who==='m'?NOTICE_OUT:NOTICE}”</div>`:'';
  return `<div class="callui" style="margin:-8px -18px -22px;padding:40px 18px 22px">
    <div class="avatar" style="background:var(--sea-soft);color:var(--sea)">${name[0]}</div><div class="nm">${name}</div><div class="tm">${sub}</div>
+   ${noticeBox}
    ${!incoming&&sub.includes('js-famtime')?'<span class="recbadge" style="margin-top:8px"><i></i>Recording · both heard the notice</span>':''}
    <div class="cbtns" style="grid-template-columns:repeat(${incoming?2:1},64px)">${incoming?`<button class="cb end" data-a="famEnd" aria-label="Decline">${I.end}</button><button class="cb acc" data-a="famAccept:${who}" aria-label="Answer">${I.phone}</button>`:`<button class="cb end" data-a="famEnd" aria-label="End call">${I.end}</button>`}</div></div>`;
 }
@@ -596,7 +560,7 @@ function linda(){
    <button class="push" data-a="openCsum"><div class="ap"><span>SAFECOMPANION · TIER ${S.tier}</span><span>now</span></div><b>${sc().pushT}</b>${sc().pushB} Tap for the full summary.</button></div>`;
  if(l==='csum'){const c=sc(),t=TIERS[S.tier];return `
    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h2 class="fh">Mom’s call summary</h2><span class="pill ${t.cls}">Tier ${S.tier}</span></div>
-   <p class="small" style="margin:0">${t.name}: ${t.rule}. Tier 1 calls never notify anyone.</p>
+   <p class="small" style="margin:0">${t.name}: ${t.rule}. ${S.tier===2?'Mom chose to share this one with you.':'Sent automatically, as Mom set up.'} Tier 1 calls never notify anyone.</p>
    <dl class="kv"><dt>Time</dt><dd class="mono">Today 10:33</dd><dt>Length</dt><dd class="mono">${mmss(S.callLen)}</dd><dt>Caller</dt><dd class="mono">${c.num}</dd><dt>Said they were</dt><dd>${c.claim}</dd><dt>Type</dt><dd>${c.type}</dd><dt>What Mom did</dt><dd>${c.action}</dd><dt>Status</dt><dd><span class="pill ok">Handled</span></dd><dt>Recording</dt><dd>On Mom’s phone for 30 days. Only she can play it.</dd></dl>
    <div><p class="small" style="margin-bottom:6px">Scam signs heard</p><div class="signs">${SIGNS.map((x,k)=>`<div class="sign ${S.signs[k]||S.ans[k]?'hit':''}">${x}</div>`).join('')}</div></div>
    <div><p class="small" style="margin-bottom:6px">What SafeCompanion heard</p>${S.flags.length?`<div class="flags">${S.flags.map(f=>`<div class="flag"><span class="mono">${f.t}</span>“${f.p}”</div>`).join('')}</div>`:'<p class="small">Mom used the yes/no questions, so no phrases were flagged.</p>'}</div>
@@ -614,7 +578,7 @@ function linda(){
    const g3=cur&&S.tier===3?[{claim:'Said they were '+sc().claim,when:'Today 10:33',num:sc().num,did:sc().action,cur:1}]:[];
    const g2=(cur&&S.tier===2?[{claim:'Said they were '+sc().claim,when:'Today 10:33',num:sc().num,did:sc().action,cur:1}]:[]).concat([{claim:'Said they were her bank',when:'Mon 4:12 PM',num:'(866) 555-0110',did:'Hung up'}]);
    return `
-   <h2 class="fh">Mom’s calls</h2><p class="small" style="margin:0">Sorted by how serious they are. You’re notified about Tier 2 and 3 only.</p>
+   <h2 class="fh">Mom’s calls</h2><p class="small" style="margin:0">Sorted by how serious they are. Tier 3 calls reach you automatically; Tier 2 calls appear when Mom shares them.</p>
    <div class="tg t3"><h3>Tier 3 · Likely scam</h3>${g3.length?g3.map(item).join(''):'<p class="small" style="margin:0">None this week</p>'}</div>
    <div class="tg t2"><h3>Tier 2 · Be careful</h3>${g2.map(item).join('')}</div>
    <div class="tg t1"><h3>Tier 1 · Normal</h3><p class="small" style="margin:0">Normal calls aren’t listed and never notify anyone. Mom’s everyday calls stay private.</p></div>
@@ -622,7 +586,7 @@ function linda(){
  if(l==='idle'||l==='push') return `<div class="lockscreen" style="margin:-8px -18px -22px;padding:40px 16px 22px">
    <div class="clock js-clock">10:3${S.notified?'4':'1'}</div><div class="date">Thursday, October 22 · Seattle</div>
    ${l==='push'?`<button class="push" data-a="openSummary"><div class="ap"><span>SAFECOMPANION</span><span>now</span></div><b>Mom just stopped a suspicious ${S.source==='call'?'call':'message'}</b>She’s fine and shared no information. Tap to see the summary.</button>`
-   :`<p class="empty">${S.callDone&&S.tier===1?'Mom’s call was normal (Tier 1), so nothing was sent. No one is bothered.':S.callDone&&S.tier>=2&&!S.notified?'Mom turned off scam alerts, so nothing was sent.':S.declined?'Mary chose not to notify this time, so nothing appears on Linda’s phone.':'No notifications'}</p>`}
+   :`<p class="empty">${S.callDone&&S.tier===1?'Mom’s call was normal (Tier 1), so nothing was sent. No one is bothered.':S.callDone&&S.tier===2&&!S.notified&&S.perms.alerts?'Mom hasn’t chosen to share her last call, so nothing was sent.':S.callDone&&S.tier>=2&&!S.notified?'Mom turned off scam alerts, so nothing was sent.':S.declined?'Mary chose not to notify this time, so nothing appears on Linda’s phone.':'No notifications'}</p>`}
    <div class="spacer"></div><button class="link" data-a="lcalls">Open SafeCompanion</button></div>`;
  if(l==='summary'){const r=S.report;return `
    <div style="display:flex;justify-content:space-between;align-items:center"><h2 class="fh">Mom’s alert</h2><span class="pill danger">High risk</span></div>
@@ -655,22 +619,18 @@ function render(){
  $('scrL').innerHTML=linda();
  let h=HINTS[hintKey()];
  if(S.m==='report'&&S.report&&S.report.risk==='low')h='The AI must also recognize normal messages. Too many false alarms and family start ignoring alerts, so low-risk results never notify Linda.';
-if(S.l==='live'&&!S.hungup)h=HINTS.lindaLive;
- if(S.m==='home'&&S.callDone&&S.tier===1)h='Tier 1: a normal call with no scam signs. Nobody gets a notification, so alerts stay meaningful and Mary’s everyday calls stay private.';
- if(S.m==='call'&&CUR!=='t3')h=CUR==='t1'?'A normal pharmacy call. The app listens quietly; with no scam signs, Mary just sees “I’m listening for you.”':'One scam sign (asking for personal info) makes this Tier 2. Mary sees a simple “Be careful.” Linda isn’t interrupted live; she gets the full summary when the call ends.';
- if(S.l==='lcalls'&&S.m!=='call')h='Linda’s view sorts Mom’s calls by tier. Tier 3 and 2 have full details; Tier 1 calls aren’t listed at all.';
- if(S.sheetL)h='Recording every call doesn’t mean sharing every call. Recordings belong to Mary; Linda only sees the summary Mary chose to send.';
+ if(S.l==='live'&&!S.hungup)h=HINTS.lindaLive;
+ if(S.m==='home'&&S.callDone&&S.tier===1)h='Tier 1: a normal call with no scam signs. Mary gets a short reassurance; nobody else is notified, so alerts stay meaningful and her everyday calls stay private.';
+ if(S.m==='call'&&CUR!=='t3')h=CUR==='t1'?'A normal pharmacy call. The app listens quietly; with no scam signs, Mary just sees “I’m listening for you.”':'One scam sign (asking for personal info) makes this Tier 2. Mary sees a simple “Be careful.” Linda isn’t interrupted live; after the call, Mary decides whether to send her the summary.';
+ if(S.m==='brief'&&S.tier===2&&S.perms.alerts)h=S.notified?'Mary chose to share. Linda now has the full summary with flagged phrases and next steps.':'Tier 2: Mary decides. Linda hasn’t been told; one tap sends her the full summary, or Mary can keep it to herself. This is the autonomy moment.';
+ if(S.l==='lcalls'&&S.m!=='call')h='Linda’s view sorts Mom’s calls by tier. Tier 3 arrives automatically, Tier 2 only when Mom shares it, and Tier 1 calls aren’t listed at all.';
+ if(S.sheetL)h='Recording every call doesn’t mean sharing every call. Recordings belong to Mary; Linda only sees the summary Mary’s settings share.';
  $('hintText').textContent=h;
  $('tabDot').hidden=!(S.unseen&&S.tab==='m');
 }
 function go(who,name){S[who]=name;const el=$(who==='m'?'scrM':'scrL');render();el.classList.remove('fade');void el.offsetWidth;el.classList.add('fade');el.scrollTop=0;}
 
 /* ---------- actions ---------- */
-function startRec(){
- clear();S.rec={sec:0,chars:0};go('m','rec');
- timers.push(setInterval(()=>{S.rec.sec++;const t=document.querySelector('.js-rectime');if(t)t.textContent=mmss(S.rec.sec);},1000));
- timers.push(setInterval(()=>{if(S.rec.chars<TRANSCRIPT.length){S.rec.chars+=4;const tx=document.querySelector('.js-tx');if(tx)tx.innerHTML=esc(TRANSCRIPT.slice(0,S.rec.chars))+'<span class="mono">▌</span>';}else{clear();timers.push(setTimeout(()=>go('m','recdone'),1600));}},110));
-}
 function answerCall(){clear();S.callStart=Date.now();S.callDone=false;S.tier=0;S.hungup=false;S.ans=[];S.live=0;S.signs=[false,false,false,false];S.flags=[];S.liveSent=false;S.lindaMsg=false;go('m','notice');
  timers.push(setTimeout(()=>{S.live=1;go('m','call');resumeLive();},4400));}
 function resumeLive(){
@@ -679,13 +639,13 @@ function resumeLive(){
  timers.push(setTimeout(()=>{if(S.m!=='call')return;const x=sc().live[S.live];S.live++;(x.hit||[]).forEach(k=>S.signs[k]=true);
    if(x.w==='Caller'){const t=mmss(callSec());(x.t.match(/<mark>(.*?)<\/mark>/g)||[]).forEach(mk=>S.flags.push({t,p:mk.replace(/<\/?mark>/g,'')}));}
    if(tierOf(S.signs)===3&&S.perms.alerts&&!S.liveSent){S.liveSent=true;S.unseen=true;go('l','livepush');}
-   render();
-   const b=document.querySelector('.js-live');if(b)b.scrollTop=b.scrollHeight;resumeLive();},2300));
+   render();resumeLive();},2300));
 }
+/* Tier 3 goes to Linda automatically (Mary's standing setting). Tier 2 waits for Mary's choice on the summary screen. */
 function finishCall(){clear();S.callLen=callSec();S.hungup=true;S.callDone=true;S.tier=Math.max(tierOf(S.signs),tierOf(S.ans));
  if(S.tier===1){go('m','home');render();return;}
  S.handled=true;
- if(S.perms.alerts){S.notified=true;S.unseen=true;if(S.l!=='live')go('l','spush');}
+ if(S.perms.alerts&&S.tier===3){S.notified=true;S.unseen=true;if(S.l!=='live')go('l','spush');}
  go('m','mpush');}
 function autoAlert(){if(S.m!=='call')return;S.auto=true;S.ans=S.signs.slice();go('m','high');}
 function runAnalysis(report,source){S.report=report;S.source=source;go('m','analyzing');timers.push(setTimeout(()=>go('m','report'),1800));}
@@ -709,10 +669,6 @@ function act(a,who){
   case 'lawBack':go('m',S.lawBack||'home');break;
   case 'askRec':S.sheetL=true;render();break;
   case 'closeSheetL':S.sheetL=false;render();break;
-  case 'recStart':startRec();break;
-  case 'recStop':clear();go('m','recdone');break;
-  case 'play':{const b=document.querySelector('[data-a="play"]');if(b){b.textContent='Playing…';setTimeout(()=>{if(b)b.textContent='▶ Play back'},2200);}break;}
-  case 'skipRec':case 'analyze':clear();runAnalysis(CALL_REPORT,'call');break;
   case 'shots':go('m','shots');break;
   case 'pick':runAnalysis(SHOTS[arg],'shot');break;
   case 'toNotify':if(S.liveSent){S.notified=true;S.handled=true;go('m','connect');}else go('m','notify');break;
