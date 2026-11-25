@@ -172,7 +172,7 @@ dialog.legal::backdrop{background:rgba(10,20,16,.55)}
     <li>The notice plays before recording starts. If the caller hangs up, nothing is recorded.</li>
     <li>Mary sees a visible recording badge during every call she answers through SafeCompanion.</li>
     <li>Recordings can only be played by Mary and are deleted after 30 days (planned behavior; not implemented in the prototype).</li>
-    <li>Linda is only notified after Mary confirms.</li>
+    <li>Linda gets an automatic short note (possible scam) or real-time alert with the type only (likely scam). Details are shared only when Mary chooses. Mary can turn alerts off.</li>
   </ul>
   <p class="foot">Sources: California Penal Code §§632, 632.7, 637.2. Case citations to be confirmed by counsel.</p>
 </div>
@@ -185,14 +185,14 @@ const QS=['Are they asking you to pay, buy gift cards, or send money?','Are they
 const SIGNS=['Money or gift cards','Rushing you','Personal info','Keep it secret'];
 const NOTICE='This call may be recorded and analyzed by SafeCompanion to help protect the person answering. Staying on the line means you agree; hanging up means nothing is recorded.';
 const SCEN={
- t1:{num:'(510) 555-0182',place:'Berkeley, CA',claim:'CVS Pharmacy',type:'Pharmacy notice',
+ t1:{ai:false,num:'(510) 555-0182',place:'Berkeley, CA',claim:'CVS Pharmacy',type:'Pharmacy notice',
    live:[{w:'Caller',t:'Hi, this is the CVS on Shattuck Avenue. Is this Mary?'},{w:'Mary',t:'Yes, it is.'},{w:'Caller',t:'Your prescription is ready to pick up. We’re open until nine tonight.'},{w:'Mary',t:'Oh good, thank you.'}],
    report:{risk:'low',type:'Pharmacy notice',why:['No request for money, a link, or personal details','Matches the pickup notices you normally get'],todo:['Pick up your medicine as usual','If unsure, call the pharmacy you normally use']}},
- t2:{num:'(888) 555-0174',place:'Toll-free number',claim:'Medicare',type:'Possible Medicare impersonation',
+ t2:{ai:true,num:'(888) 555-0174',place:'Toll-free number',claim:'Medicare',type:'Possible Medicare impersonation',
    live:[{w:'Caller',t:'Hello, I’m calling from the Medicare office about your new card.'},{w:'Caller',t:'To mail it, I just need to confirm your date of birth and Medicare number.',hit:[2],flag:'confirm your date of birth'},{w:'Mary',t:'I’d rather not give that out on the phone.'},{w:'Caller',t:'That’s fine. You’ll get a letter. Goodbye.'}],
    report:{risk:'high',type:'Possible Medicare impersonation',why:['They asked for your date of birth and Medicare number by phone','Medicare doesn’t ask for this by phone call'],todo:['Don’t call that number back','If unsure, call Medicare at the number on your card','Tell your family so they can check with you']},
    opener:'Mom, I heard you didn’t give your details to that caller. That was smart!'},
- t3:{num:'(202) 555-0143',place:'Washington, DC',claim:'Social Security',type:'Government impersonation (Social Security)',
+ t3:{ai:true,num:'(202) 555-0143',place:'Washington, DC',claim:'Social Security',type:'Government impersonation (Social Security)',
    live:[{w:'Caller',t:'Hello, this is an officer with the Social Security Administration.'},{w:'Caller',t:'Your number has been suspended due to suspicious activity.',hit:[1],flag:'suspended'},{w:'Mary',t:'Oh no. What does that mean?'},{w:'Caller',t:'I need you to read me your number to confirm it. It must be done today or your account will be frozen.',hit:[1,2],flag:'read me your number'},{w:'Caller',t:'And please don’t discuss this with family. It’s a federal matter.',hit:[3],flag:'don’t discuss this with family'}],
    report:{risk:'high',type:'Government impersonation (Social Security)',why:['They asked you to read out your Social Security number','They said it must be done today','They told you not to discuss it with family'],todo:['Don’t call that number back','Call Social Security at its official number, 1-800-772-1213','If you already gave your number, tell your family'],action:'Hung up and shared no information'},
    opener:'Mom, I heard you were really sharp today! You caught that fake Social Security call.'}
@@ -232,7 +232,7 @@ function mary(){
  if(m==='quit') return `<div class="banner ok" style="font-size:1.4rem">The caller hung up</div>
    <p class="p">Nothing was recorded after they left, and you didn’t share anything.</p>
    <div class="spacer" style="flex:1"></div><button class="big primary" data-a="home"><span>OK, back to home</span></button>`;
- if(m==='call'){const hit=countSigns()>0;return `<div class="oncall"><span>● Recording · ${sc().num}</span><span class="js-t">${mmss(sec())}</span></div>
+ if(m==='call'){const hit=countSigns()>0||!!sc().ai;return `<div class="oncall"><span>● Recording · ${sc().num}</span><span class="js-t">${mmss(sec())}</span></div>
    <span class="recbadge"><i></i>Recording: the caller heard the notice</span>
    <div class="listen ${hit?'warn':''}">${hit?'Be careful.':'I’m listening for you.'}<small>${hit?'Don’t give out any numbers or codes.':'You don’t need to do anything.'}</small></div>
    <div class="signs">${SIGNS.map((x,k)=>`<div class="sign ${S.signs[k]?'hit':''}">${x}</div>`).join('')}</div>
@@ -244,6 +244,11 @@ function mary(){
    <h2 class="h">${QS[i]}</h2><div class="spacer" style="flex:1"></div>
    <div class="row2"><button class="yn yes" data-a="ans:1">Yes</button><button class="yn no" data-a="ans:0">No</button></div>
    <button class="link" data-a="ans:0">Not sure, next question</button>`;}
+ if(m==='brief2') return `<span class="pill warn" style="align-self:flex-start;font-size:1rem">Be careful · Only you can see this</span>
+   <h2 class="h">A call had one warning sign.</h2>
+   <p class="p">Someone asked for something personal. Linda got a short note: “may be a scam.” Details are yours to share.</p>
+   <button class="big primary" data-a="report2"><span>See the short summary</span></button>
+   <div class="spacer" style="flex:1"></div><button class="link" data-a="home">Done</button>`;
  if(m==='tier2') return `<span class="pill warn" style="align-self:flex-start;font-size:1rem">Be careful</span>
    <h2 class="h">Be careful with this call.</h2>
    <p class="p">Someone asked for something personal. You don’t have to decide anything now.</p>
@@ -260,11 +265,11 @@ function mary(){
    <div class="card"><h3>What to do next</h3><ul>${r.todo.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
    <div class="spacer" style="flex:1"></div>
    <button class="big primary" data-a="${hi&&!S.never?'notify':'home'}"><span>${hi&&!S.never?'Next':'OK, back to home'}</span></button>`;}
- if(m==='notify') return `<h2 class="h">Let Linda know?</h2>
-   <div class="card"><h3>Linda will see</h3><ul><li>A short summary: “${esc(sc().report.type)}”</li><li>What you did: ${esc(sc().report.action||'Shared nothing')}</li></ul>
+ if(m==='notify') return `<h2 class="h">Share the details with Linda?</h2>
+   <p class="s">Linda has already received a real-time alert with the type only.</p><div class="card"><h3>Linda will see</h3><ul><li>A summary: “${esc(sc().report.type)}”, what you did, and the warning words</li><li>What you did: ${esc(sc().report.action||'Shared nothing')}</li></ul>
    <h3 style="margin-top:12px">Linda won’t see</h3><ul><li>What the caller said, or any recording</li></ul></div>
    <div class="spacer" style="flex:1"></div>
-   <button class="big primary" data-a="doNotify"><span>Yes, let her know</span></button>
+   <button class="big primary" data-a="doNotify"><span>Yes, share the details</span></button>
    <button class="big" data-a="declineNotify"><span>Not this time</span></button>
    <p class="s" style="text-align:center">It’s your choice, and you can change it anytime.</p>`;
  if(m==='sent') return `<div class="avatar" style="align-self:center;background:var(--sea-soft);color:var(--sea)">L</div>
@@ -284,7 +289,7 @@ function mary(){
    <button class="big" data-a="pick:cvs"><span>CVS Pharmacy<small>“Your prescription is ready for pickup…”</small></span></button>
    <button class="big" data-a="pick:usps"><span>+1 (415) 555-0199<small>“USPS: Your package could not be delivered…”</small></span></button>
    <button class="link" data-a="home">Back to home</button>`;
- if(m==='privacy'){const P=[['alerts','Scam alerts','Family is told only after you confirm. High-risk summaries only, never full content.'],['meds','Medicine reminders','Linda sees whether you took it, not the medicine name'],['sos','Emergency button','Time and rough location, only when you press it'],['daily','Daily activity','Off by default. Linda sees only whether you used the app']];
+ if(m==='privacy'){const P=[['alerts','Scam alerts','Possible scam: Linda gets a short note. Likely scam: a real-time alert with the type only. Details only if you choose to share them.'],['meds','Medicine reminders','Linda sees whether you took it, not the medicine name'],['sos','Emergency button','Time and rough location, only when you press it'],['daily','Daily activity','Off by default. Linda sees only whether you used the app']];
   return `<h2 class="h">Who can see my information</h2><p class="s">Family with access: <b>Linda (daughter)</b></p>
    ${P.map(([k,n,d])=>`<div class="perm"><b>${n}</b><span>${d}</span><button class="tbtn" style="grid-row:1/3;grid-column:2" data-a="tog:${k}" aria-pressed="${S.perms[k]}">${S.perms[k]?'On':'Off'}</button></div>`).join('')}
    <div class="perm"><b>Never notify family</b><span>If on, Linda is never told, even for high-risk calls.</span><button class="tbtn" style="grid-row:1/3;grid-column:2" data-a="tog:never" aria-pressed="${S.never}">${S.never?'On':'Off'}</button></div>
@@ -300,6 +305,12 @@ function msgTop(){return ''}
 /* ---------- Linda ---------- */
 function linda(){
  const l=S.l;
+ if(l==='short') return `<div class="lockscreen" style="margin:-8px -18px -22px;padding:40px 16px 22px">
+   <div class="clock">10:33</div><div class="date">Thursday, October 22 · Berkeley, CA</div>
+   <button class="push" data-a="summary"><div class="ap"><span>SAFECOMPANION</span><span>now</span></div><b>Mom had a call that may be a scam</b>She is handling it. Details are shared only if Mom chooses.</button></div>`;
+ if(l==='live') return `<div class="lockscreen" style="margin:-8px -18px -22px;padding:40px 16px 22px">
+   <div class="clock">10:31</div><div class="date">Thursday, October 22 · Berkeley, CA</div>
+   <button class="push" data-a="ack"><div class="ap"><span>SAFECOMPANION · REAL-TIME</span><span>now</span></div><b>Possible scam call: Mom</b>Type: government impersonation. Mom has been warned. Details are shared only if she chooses.</button></div>`;
  if(l==='push') return `<div class="lockscreen" style="margin:-8px -18px -22px;padding:40px 16px 22px">
    <div class="clock">10:33</div><div class="date">Thursday, October 22 · Berkeley, CA</div>
    <button class="push" data-a="summary"><div class="ap"><span>SAFECOMPANION</span><span>now</span></div><b>Mom just stopped a suspicious call</b>She is fine and shared no information. Tap to see the summary.</button></div>`;
@@ -321,7 +332,7 @@ function linda(){
    <button class="fbtn ghost" data-a="${S.l==='lperms'?'back':'back'}">Back</button>`;
  if(l==='call') return `<h2 class="fh">Call Mom</h2><p class="s">Calling Mom…</p><div class="spacer" style="flex:1"></div><button class="fbtn ghost" data-a="back">Back</button>`;
  return `<div class="lockscreen" style="margin:-8px -18px -22px;padding:40px 16px 22px"><div class="clock">10:31</div><div class="date">Thursday, October 22 · Berkeley, CA</div>
-   <p class="s" style="text-align:center;margin-top:30px">${S.declined?'Mary chose not to tell you this time. Nothing appears here.':S.tier===1?'Mom’s call was normal. Nothing was sent.':'No notifications'}</p>
+   <p class="s" style="text-align:center;margin-top:30px">${S.declined?'Mom chose not to share details. You still received the real-time alert for the call.':S.tier===2?'Mom had a call with one warning sign. Only she was told. You were not notified.':S.tier===1?'Mom’s call was normal. Nothing was sent.':'No notifications'}</p>
    <div class="spacer" style="flex:1"></div><button class="link" data-a="lperms">What can I see about Mom?</button></div>`;
 }
 
@@ -336,9 +347,10 @@ function noteFor(){
  if(m==='ring')return 'The caller hears the recording notice before anything is recorded. Use the Scenario switch above to change the call.';
  if(m==='notice')return 'The notice is the legal core of the design. Recording starts only after it. Staying on the line counts as agreement; hanging up declines.';
  if(m==='call')return 'The app listens for four FTC scam signs. Mary is not asked to press anything. Linda is not notified during the call.';
- if(m==='high'||m==='tier2')return 'Tier 2 or 3: Mary is warned. Nobody is notified yet.';
+ if(m==='high'||m==='tier2')return 'Tier 3: Mary is warned, and Linda gets a real-time alert with the type only. Details wait for Mary.';
+ if(m==='brief2')return 'Tier 2: Linda gets a short note automatically. The details stay with Mary unless she chooses to share them.';
  if(m==='report')return 'The result is pre-recorded in demo mode and labeled as such.';
- if(m==='notify')return 'Mary decides whether Linda is told. Linda is notified only after she says yes.';
+ if(m==='notify')return 'Linda already has the real-time alert. Mary decides whether the details are shared.';
  if(m==='sent'||S.l==='push'||S.l==='summary')return 'Linda receives a summary only. She never receives the recording or the full conversation.';
  return 'Demo flow. Switch tabs to see what Linda sees.';
 }
@@ -354,13 +366,14 @@ function runLive(){
  later(2000,()=>{if(S.m!=='call')return;const x=live[S.li++];
    (x.hit||[]).forEach(k=>S.signs[k]=true);
    if(x.flag)S.flags.push(x.flag);
-   if(countSigns()>=2&&S.m==='call'){S.tier=3;go('m','high');return;}
+   const n0=countSigns(), agree=(n0>=1&&!!sc().ai); if(S.m==='call'&&(n0>=2||agree)&&!S.never&&S.perms.alerts){S.realtime=true;S.l='live';} if(S.m==='call'&&n0>=2){S.tier=3;go('m','high');return;}
    render();runLive();});
 }
-function finish(){clear();const n=countSigns();S.tier=tierOf(n);
- if(n===0){S.handled=false;go('m','home');return;}
+function finish(){clear();const n=countSigns(), ai=!!sc().ai;
+ if(n===0&&!ai){S.tier=1;S.handled=false;go('m','home');return;}
+ S.tier=n>=2?3:2;
  S.handled=true;
- if(S.tier===2){go('m','tier2');return;}
+ if(S.tier===2){if(!S.never&&S.l!=='live')S.l='short';go('m','brief2');return;}
  go('m','report');
 }
 function startGuard(){clear();S.qi=0;S.ans=[false,false,false,false];S.signs=[false,false,false,false];S.flags=[];go('m','q');}
@@ -374,6 +387,7 @@ function act(a){
  const i=a.indexOf(':');const cmd=i<0?a:a.slice(0,i);const arg=i<0?'':a.slice(i+1);
  switch(cmd){
   case 'answer':answer();break;
+  case 'report2':go('m','report');break;
   case 'decline':clear();go('m','home');break;
   case 'callerQuit':clear();go('m','quit');break;
   case 'hangup':clear();finish();break;
@@ -381,10 +395,11 @@ function act(a){
   case 'startGuard':startGuard();break;
   case 'ans':answerQ(arg==='1');break;
   case 'notify':if(S.never){go('m','report');break;}go('m','notify');break;
-  case 'doNotify':S.confirmed=true;S.declined=false;go('l','push');go('m','sent');break;
+  case 'doNotify':S.confirmed=true;S.declined=false;go('l','summary');go('m','sent');break;
   case 'declineNotify':S.declined=true;S.confirmed=false;go('m','home');break;
   case 'callLinda':go('l','call');break;
   case 'summary':go('l','summary');break;
+  case 'ack':S.l='idle';render();break;
   case 'lcall':go('l','call');later(1500,()=>{if(S.l==='call')go('l','idle');});break;
   case 'lperms':go('l','lperms');break;
   case 'back':go('l',S.confirmed?'summary':'idle');break;
